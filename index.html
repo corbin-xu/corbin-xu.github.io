@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORBINXU | HUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Light Mode - Enhanced Contrast */
+            --apple-bg: #f5f5f7;
+            --apple-card: #ffffff;
+            --apple-card-inner: #e8e8ed; 
+            --apple-text-main: #1d1d1f;
+            --apple-text-secondary: #323234;
+            --apple-text-dim: #636366;
+            --apple-border: rgba(0, 0, 0, 0.1);
+            
+            --gap: 12px;
+            --radius-outer: 18px;
+            --radius-inner: 10px;
+        }
+
+        [data-theme='dark'] {
+            /* Dark Mode */
+            --apple-bg: #000000;
+            --apple-card: #1c1c1e;
+            --apple-card-inner: #2c2c2e;
+            --apple-text-main: #f5f5f7;
+            --apple-text-secondary: #a1a1a6;
+            --apple-text-dim: #86868b;
+            --apple-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--apple-bg);
+            color: var(--apple-text-main);
+            font-family: -apple-system, "SF Pro Display", "PingFang SC", sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Nav Overlay - Compressed Spacing */
+        #nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--apple-card);
+            z-index: 2000;
+            overflow: hidden;
+            transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #nav-overlay.active { height: 280px; border-bottom: 1px solid var(--apple-border); }
+
+        .nav-link {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--apple-text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Perfect Square Dot Implementation */
+        .perfect-square-dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--apple-text-dim);
+            display: inline-block;
+            flex-shrink: 0;
+            margin-top: 8px; /* Alignment fix */
+        }
+
+        .nav-link:hover { opacity: 0.5; transform: translateX(10px); }
+
+        .header-bar {
+            height: 54px;
+            background: var(--apple-card);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 2001;
+            border-bottom: 1px solid var(--apple-border);
+            display: flex;
+            align-items: center;
+        }
+
+        .ms-card {
+            background: var(--apple-card);
+            border-radius: var(--radius-outer);
+            padding: 24px;
+            border: 1px solid var(--apple-border);
+        }
+
+        .inner-item {
+            background: var(--apple-card-inner);
+            border-radius: var(--radius-inner);
+            padding: 12px;
+        }
+
+        .tag-label {
+            font-family: "PingFang SC", sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--apple-card-inner);
+            color: var(--apple-text-secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .mono-deco {
+            font-family: "SF Mono", "Menlo", monospace;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--apple-text-dim);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--gap);
+            max-width: 1100px;
+            margin: var(--gap) auto;
+            padding: 0 var(--gap);
+        }
+
+        @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <!-- Nav Overlay -->
+    <div id="nav-overlay">
+        <div class="max-w-[1100px] w-full mx-auto px-10 flex flex-col md:flex-row justify-between items-center md:items-end">
+            <nav class="flex flex-col gap-4">
+                <a href="javascript:void(0)" onclick="router.navigate('home')" class="nav-link">内容档案库<span class="perfect-square-dot"></span></a>
+                <a href="javascript:void(0)" onclick="router.navigate('gear')" class="nav-link">顶级器材清单<span class="perfect-square-dot"></span></a>
+                <a href="javascript:void(0)" onclick="router.navigate('about')" class="nav-link">关于本人<span class="perfect-square-dot"></span></a>
+            </nav>
+            <div class="flex flex-col items-start md:items-end gap-1 mt-8 md:mt-0">
+                <span class="mono-deco">NODE: HGH_STORM_CENTER</span>
+                <span class="mono-deco">STATUS: OPTIMAL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-bar">
+        <div class="max-w-[1100px] w-full mx-auto px-6 flex justify-between items-center">
+            <button onclick="toggleNav()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <i data-lucide="layout-grid" class="w-5 h-5 text-[var(--apple-text-main)]"></i>
+            </button>
+            
+            <div class="font-black text-xl tracking-tighter uppercase cursor-pointer" onclick="router.navigate('home')">
+                Corbin<span class="opacity-30">Xu</span>
+            </div>
+
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <i data-lucide="sun-moon" class="w-4 h-4 text-[var(--apple-text-main)]"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-grid">
+        <!-- Sidebar -->
+        <aside class="flex flex-col gap-[var(--gap)]">
+            <div class="ms-card">
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="https://s3.bmp.ovh/imgs/2025/12/31/ffd6588cf439cedc.png" alt="Corbin Xu" class="w-14 h-14 rounded-2xl flex-shrink-0 hover:shadow-lg object-cover transition-shadow" />
+                    <div>
+                        <div class="flex items-center gap-1 leading-none">
+                            <span class="font-bold text-[16px] leading-none -translate-y-0.5">Corbin Xu</span>
+                            <i data-lucide="badge-check" class="w-4 h-4 text-blue-500 flex-shrink-0"></i>
+                        </div>
+                        <p class="mono-deco !text-[9px] mt-0.5 w-full">Creative Director</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2 py-4 border-t border-[var(--apple-border)]">
+                    <div class="inner-item flex justify-between items-center">
+                        <span class="text-[12px] text-[var(--apple-text-dim)]">身份认证</span>
+                        <span class="text-[12px] font-bold">创始人</span>
+                    </div>
+                    <div class="inner-item flex justify-between items-center">
+                        <span class="text-[12px] text-[var(--apple-text-dim)]">核心设备</span>
+                        <span class="text-[12px] font-bold">Mac Studio</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mt-2">
+                    <div class="inner-item text-center">
+                        <div class="text-[17px] font-black">240</div>
+                        <div class="text-[10px] text-[var(--apple-text-dim)] uppercase">档案</div>
+                    </div>
+                    <div class="inner-item text-center">
+                        <div class="text-[17px] font-black">5.1M</div>
+                        <div class="text-[10px] text-[var(--apple-text-dim)] uppercase">关注</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ms-card">
+                <div class="mono-deco mb-3">Live_System</div>
+                <div class="inner-item space-y-3">
+                    <div class="flex justify-between items-end">
+                        <span class="text-[12px] font-bold">管道负载</span>
+                        <span class="font-mono text-[12px] font-bold text-blue-500">96.8%</span>
+                    </div>
+                    <div class="h-1 w-full bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500 w-[96.8%] transition-all duration-1000"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex flex-col gap-[var(--gap)]">
+            <!-- Dynamic Content -->
+        </main>
+    </div>
+
+    <!-- Optimized Footer -->
+    <footer class="max-w-[1100px] mx-auto mt-16 px-6 pb-12 border-t border-[var(--apple-border)] pt-10">
+        <div class="flex flex-col md:flex-row justify-between gap-12 pr-10">
+            <div class="max-w-sm space-y-4">
+                <h2 class="text-2xl font-black tracking-tight uppercase leading-none">Infinite Progress.</h2>
+                <p class="text-[14px] text-[var(--apple-text-secondary)]">追求视听极致，探索技术边界。这里不仅是档案的记录，更是对数字工业美学的持续思考。</p>
+            </div>
+            <div class="flex gap-20">
+                <div class="space-y-4">
+                    <h3 class="mono-deco">Archive</h3>
+                    <ul class="text-[13px] font-bold space-y-2 text-[var(--apple-text-secondary)]">
+                        <li><a href="#" class="hover:text-blue-500">深度长文</a></li>
+                        <li><a href="#" class="hover:text-blue-500">器材实验室</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="mono-deco">Connect</h3>
+                    <ul class="text-[13px] font-bold space-y-2 text-[var(--apple-text-secondary)]">
+                        <li><a href="#" class="hover:text-blue-500">哔哩哔哩</a></li>
+                        <li><a href="#" class="hover:text-blue-500">商务合作</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 flex justify-between items-center text-[10px] font-mono text-[var(--apple-text-dim)] pr-10">
+            <span>© 2025 CORBINXU ARCHIVE</span>
+            <span>SYSTEM_RENDER: 2.8ms / HGH_NODE_01</span>
+        </div>
+    </footer>
+
+    <script>
+        const CONFIG = {
+            posts: [
+                {
+                    id: 1,
+                    tag: "后期流程",
+                    title: "如何在 2025 年建立一套专业级的 8K 视频工作流",
+                    date: "2025.12.31",
+                    desc: "极致的效率不仅仅在于硬件。本文将从素材预处理、阵列读写分配到色彩科学管理，深度复盘我们的生产力逻辑。"
+                },
+                {
+                    id: 2,
+                    tag: "硬件实验",
+                    title: "Mac Studio M2 Ultra 半年重度使用报告",
+                    date: "2025.12.31",
+                    desc: "它是否真的能取代那些庞大的 PC 工作站？在面对 R3D 素材的高强度渲染时，性能与稳定的终极博弈。"
+                }
+            ]
+        };
+
+        function toggleNav() {
+            document.getElementById('nav-overlay').classList.toggle('active');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            lucide.createIcons();
+        }
+
+        const router = {
+            navigate(path) {
+                if(document.getElementById('nav-overlay').classList.contains('active')) toggleNav();
+                const container = document.getElementById('main-content');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+
+                if(path === 'home') {
+                    container.innerHTML = CONFIG.posts.map(p => `
+                        <article class="ms-card group cursor-pointer" onclick="router.navigate('post')">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="tag-label">${p.tag}</span>
+                                <span class="mono-deco">${p.date}</span>
+                            </div>
+                            <h2 class="text-[20px] font-bold group-hover:text-blue-600 transition-colors mb-2">${p.title}</h2>
+                            <p class="text-[14px] text-[var(--apple-text-secondary)] line-clamp-2">${p.desc}</p>
+                            <div class="mt-5 flex items-center text-[11px] font-bold text-blue-600 uppercase tracking-widest">
+                                EXPLORE <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-2"></i>
+                            </div>
+                        </article>
+                    `).join('');
+                } else {
+                    container.innerHTML = `<div class="ms-card py-32 text-center mono-deco">SYNCING_DATA...</div>`;
+                }
+                lucide.createIcons();
+            }
+        };
+
+        window.onload = () => {
+            lucide.createIcons();
+            router.navigate('home');
+        };
+    </script>
+</body>
+</html>
