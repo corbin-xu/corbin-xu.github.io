@@ -119,7 +119,7 @@
 
         .mono-deco {
             font-family: "SF Mono", "Menlo", monospace;
-            font-size: 10px;
+            font-size: 12px; /* Increased from 10px */
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--apple-text-dim);
@@ -139,7 +139,6 @@
 </head>
 <body>
 
-    <!-- Nav Overlay -->
     <div id="nav-overlay">
         <div class="max-w-[1100px] w-full mx-auto px-10 flex flex-col md:flex-row justify-between items-center md:items-end">
             <nav class="flex flex-col gap-4">
@@ -154,7 +153,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header class="header-bar">
         <div class="max-w-[1100px] w-full mx-auto px-6 flex justify-between items-center">
             <button onclick="toggleNav()" class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
@@ -172,7 +170,6 @@
     </header>
 
     <div class="main-grid">
-        <!-- Sidebar -->
         <aside class="flex flex-col gap-[var(--gap)]">
             <div class="ms-card">
                 <div class="flex items-center gap-4 mb-6">
@@ -182,7 +179,7 @@
                             <span class="font-bold text-[16px] leading-none -translate-y-0.5">Corbin Xu</span>
                             <i data-lucide="badge-check" class="w-4 h-4 text-blue-500 flex-shrink-0"></i>
                         </div>
-                        <p class="mono-deco !text-[9px] mt-0.5 w-full">Creative Director</p>
+                        <p class="mono-deco !text-[11px] mt-1 w-full">Creative Director</p>
                     </div>
                 </div>
 
@@ -200,11 +197,11 @@
                 <div class="grid grid-cols-2 gap-2 mt-2">
                     <div class="inner-item text-center">
                         <div class="text-[17px] font-black">240</div>
-                        <div class="text-[10px] text-[var(--apple-text-dim)] uppercase">档案</div>
+                        <div class="text-[11px] text-[var(--apple-text-dim)] uppercase">档案</div>
                     </div>
                     <div class="inner-item text-center">
                         <div class="text-[17px] font-black">5.1M</div>
-                        <div class="text-[10px] text-[var(--apple-text-dim)] uppercase">关注</div>
+                        <div class="text-[11px] text-[var(--apple-text-dim)] uppercase">关注</div>
                     </div>
                 </div>
             </div>
@@ -223,13 +220,10 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main id="main-content" class="flex flex-col gap-[var(--gap)]">
-            <!-- Dynamic Content -->
-        </main>
+            </main>
     </div>
 
-    <!-- Optimized Footer -->
     <footer class="max-w-[1100px] mx-auto mt-16 px-6 pb-12 border-t border-[var(--apple-border)] pt-10">
         <div class="flex flex-col md:flex-row justify-between gap-12 pr-10">
             <div class="max-w-sm space-y-4">
@@ -253,8 +247,12 @@
                 </div>
             </div>
         </div>
-        <div class="mt-12 flex justify-between items-center text-[10px] font-mono text-[var(--apple-text-dim)] pr-10">
-            <span>© 2025 CORBINXU ARCHIVE</span>
+        
+        <div class="mt-12 flex flex-col md:flex-row justify-between items-center text-[12px] font-mono text-[var(--apple-text-dim)] pr-10 gap-4 md:gap-0">
+            <div class="flex flex-col md:flex-row gap-2 md:gap-6 items-center">
+                <span>© 2025 CORBINXU ARCHIVE</span>
+                <a href="https://icp.gov.moe/?keyword=20269999" target="_blank" class="hover:text-[var(--apple-text-secondary)] transition-colors border-b border-transparent hover:border-[var(--apple-text-dim)]">萌ICP备20269999号</a>
+            </div>
             <span>SYSTEM_RENDER: 2.8ms / HGH_NODE_01</span>
         </div>
     </footer>
